@@ -17,11 +17,11 @@ nested function은 바깥에 선언된 함수의 변수들에 접근할 수 있�
 스크립트가 시작하면 Lexical Environment는 모든 선언된 변수들로 미리 채워진다 (상태는 uninitialized)
 let이나 const로 선언되면 그때 value가 할당되고 이후에 변경하면 바뀐다
 
-1. 함수 선언은 스크립트 시작과 함께 바로 준비된다
+2. 함수 선언은 스크립트 시작과 함께 바로 준비된다
 Lexical Environment가 만들어질 때 함수도 바로 사용가능한 상태임(let은 선언 코드를 만날때까지 사용할 수는 없다)
 함수 표현식은 안됨
 
-1. 함수가 실행될 때, 지역변수들과 함수인자들을 저장하기 위해 Lexical Environment가 만들어진다
+3. 함수가 실행될 때, 지역변수들과 함수인자들을 저장하기 위해 Lexical Environment가 만들어진다
 ```javascript
 let phrase = 'Hello';
 function say(name) {
@@ -35,7 +35,7 @@ outer Lexical Environment에 phrase: "Hello", say: function
 inner가 outer참조한다
 변수는 inner부터 점점 out으로 찾아진다
 
-1. Function return할 때
+4. Function return할 때
 ```javascript
 function makeCounter() {
   let count = 0;
