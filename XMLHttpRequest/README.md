@@ -54,7 +54,11 @@ let json = JSON.stringify({
 
 xhr.open("POST", '/submit')
 xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
+xhr.onreadystatechange = nameOfTheFunction;
 xhr.send(json);
 ```
 - POST요청 보낼 때 json으로 보낼 수 있다. 그때는 header 설정을 저렇게 해줘야 서버에서 인식 가능하다
+- onreadystatechange는 응답이 오고나서 어떤 것이 실행될지 먼저 정해주는 것(함수 두개를 연결시킬 수 있다)
+
+- vanilla JS에서 addEventListener에다가 함수를 함들어서 넣으면 된다
+- https://developer.mozilla.org/ko/docs/Web/Guide/AJAX/Getting_Started 참고
