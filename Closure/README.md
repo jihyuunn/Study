@@ -69,4 +69,8 @@ count();
 그런데 0.1초 후에 i는 이미 10이 되어있어서 이후 9번 모두 10으로 출력이 된다
 이것을 원래 의도대로 1부터 9까지 출력되게 하려면 for(let i=0; i<10; i+=1)로 바꿔주면 된다
 
-#### 결론은 Javascript의 함수는 모두 클로져라고 할 수 있고 숨겨진 [[Environment]]라는 속성으로 어디에서 만들어졌는지 기억할 수 있어서 바깥변수들에 접근할 수 있다
+### 결론은 Javascript의 함수는 모두 클로져라고 할 수 있고 숨겨진 [[Environment]]라는 속성으로 어디에서 만들어졌는지 기억할 수 있어서 바깥변수들에 접근할 수 있다
+
+### Garbage Collection
+보통 함수 call이 끝나면 Lexical Environment는 메모리에서 삭제된다(더이상 참조하지 않아도 되기때문)
+그런데 함수가 끝난 후에도 nested function이 계속 접근가능하면 Lexical Environment를 참조하는 [[Environment]]가 계속 있게된다
