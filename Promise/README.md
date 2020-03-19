@@ -55,5 +55,36 @@ fetch('url')
 프라미스 체인에서 에러가 발생하면 가장 가까운 rejection 핸들러로 넘어간다   
 여러개의 then으로 체이닝을 하고 마지막에 catch로 에러 핸들러를 만들어주면 중간 어느곳에서 에러가 발생해도   
 에러를 전부 잡을 수 있다   
-=> 암시적인 try ... catch
+=> 암시적인 try ... catch   
+첫번째 catch블록에서 에러를 처리하고, 처리하지 못하면 또다시 throw Error를 통해 다음 catch블록으로 처리하지 못한 에러를 알려줄 수 있음   
 
+#### Unhandledrejection
+에러를 처리하지 못하면 스크립트가 죽고 콘솔창에 에러가 뜬다 -> 브라우저 환경에서는 이를 unhandledrejection을 통해 바로잡을 수 있다   
+```javascript
+window.addEventListener('unhandledrejction', function(event) {
+  alert(event.promise);
+  alert(event.reason);
+})
+```
+HTML명세에 있는 표준 이벤트이고 .catch가 없으면 unhandledrejection이 실행된다   
+이러한 처리 불가능한 오류는 사용자나 서버에 알려서 어플리케이션이 아무이유없이 죽는걸 방지해야 한다   
+
+#### Microtask Queue
+```javascript
+let promise = Promise.resolve();
+promise.then(() => alert('promise success'));
+alert('promise ended');
+```
+위의 코드에서 프라미스 종료가 프라미스 성공보다 먼저 뜨는 이유는 현재 코드가 모두 실행되고 나서 큐가 실행되기 때문이다   
+.then/catch/finally는 microtask queue에 들어간다고 생각하면 된다   
+unhandledrejection은 마이크로태스크 큐 끝에서 에러가 처리되지 않으면 실행된다   
+
+```javascript
+let promise = Promise.reject(new Error("프라미스 실패!"));
+setTimeout(() => promise.catch(err => alert('잡았다!')), 1000);
+
+// Error: 프라미스 실패!
+window.addEventListener('unhandledrejection', event => alert(event.reason));
+```
+여기에서 "프라미스 실패"가 먼저 출력되고 그 다음 "잡았다"가 출력되는데 프라미스를 검사하고 하나라도 rejected상태이면 unhandledrejection이 트리거 된다   
+.catch로 에러가 잡히기는 하지만, unhandledrejection이 트리거 된 이후에 트리거 되므로 unhandledrejection이 작동된다   
