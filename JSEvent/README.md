@@ -54,4 +54,21 @@ element.addEventListener('event', handler, true);
 
 ### Event Delegation
 캡쳐링과 버블링을 이용해 강력한 이벤트 핸들링 패턴인 이벤트 위임을 구현할 수 있다   
-비슷한 방식으로 여러 요소를 다뤄야 할 때 사용되고, 요소의 공통 조상에 이벤트 핸들러를 하나만 할당해도 여러요소를 한꺼번에 다룰 수 있다   
+비슷한 방식으로 여러 요소를 다뤄야 할 때 사용되고, 요소의 공통 조상에 이벤트 핸들러를 하나만 할당해도 여러요소를 한꺼번에 다룰 수 있다
+```javascript
+let selectedId;
+//테이블 안에 있는 곳을 아무데나 눌렀을 때 태그 네임이 'TD'가 아니면 아무런 효과가 나지않고
+//태그네임이 'TD'이면 hightlight 함수가 실행이 된다 -> 클래스 추가 됨
+table.onclick = fuction(event) {
+    let target = event.target;
+    if (target.tagName != 'TD') return;
+    highlight(target); 
+}
+function highlight(td) {
+    if (selectedId) {
+        selectedId.classList.remove('highlight');
+    }
+    selectedId = td;
+    selectedId.classList.add('highlight');
+}
+```   
