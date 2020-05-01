@@ -33,3 +33,17 @@ for (let i in obj) {
 }
 // 1, 2, 3 순서대로 출력
 ```
+
+### Break/Continue   
+- 라벨을 지정한 break문을 실행하면 라벨이 붙은 문장 끝으로 점프한다   
+```javascript
+const a = [1,2,3,4,5], b = [3,4,5,6,7];
+loop: for (let i=0;i<a.length;i++) {
+    for (let j=0;j<b.length;j++) {
+        if (a[i]===b[j]) break loop
+    }
+}
+console.log(`a[${i}], b[${j}]`)
+// a[2], b[0]
+```
+- continue에도 라벨을 지정하면 라벨이 붙은 문장의 처음으로 돌아가서 다시 조건 검사를 한다   
