@@ -124,4 +124,69 @@ console.log(window.norm) // norm(x)
 - 이벤트 처리와 같은 비동기 처리도 똑같은 방식으로 실행한다. 실행 준비를 마친 이벤트처리기 함수와 비동기 처리는 실행하기에 앞서 이벤트 큐에 들어간다. 그리고 현재 실행중인 함수의 작업이 끝나면 이벤트 큐의 첫번째부터 차례대로 호출 스택에 push해서 실행한다   
 
 ### 환경 레코드와 지역변수   
-- 함수를 호출하면 현재 실행중인 코드의 작업을 일시적으로 멈추고 실행문맥(Execution Context)을 생성 -> 함수의 실행 문맥이 호출스택에 push되고 실행 문맥 안에 렉시컬 환경 컴포넌트 생성 -> 렉시컬 환경 컴포넌트 안에 환경 레코드(함수 안에 선언된 변수들이나 전역 객체 등)와 외부 렉시컬환경 참조가 기록된다 -> ThisBinding컴포넌트에 그 함수를 호출한 객체의 참조를 저장하고 이것으로 this값을 결정 -> 함수안의 코드가 순서대로 실행( 이 시점에 이미 함수안에 있는 변수나 함수가 이미 선언적 환경 레코드에 저장되어있는 상태이기 때문에 함수안의 어디에 위치하더라도 접근할 수 있다=호이스팅이 되는 이유 ) -> 함수가 종료되어 제어권이 호출한 코드로 돌아가면 실행문맥과 그 안의 렉시컬환경컴포넌트가 메모리에서 지워진다   
+- 함수를 호출하면 현재 실행중인 코드의 작업을 일시적으로 멈추고 실행문맥(Execution Context)을 생성 -> 함수의 실행 문맥이 호출스택에 push되고 실행 문맥 안에 렉시컬 환경 컴포넌트 생성 -> 렉시컬 환경 컴포넌트 안에 환경 레코드(함수 안에 선언된 변수들이나 전역 객체 등)와 외부 렉시컬환경 참조가 기록된다 -> ThisBinding컴포넌트에 그 함수를 호출한 객체의 참조를 저장하고 이것으로 this값을 결정 -> 함수안의 코드가 순서대로 실행( 이 시점에 이미 함수안에 있는 변수나 함수가 이미 선언적 환경 레코드에 저장되어있는 상태이기 때문에 함수안의 어디에 위치하더라도 접근할 수 있다=호이스팅이 되는 이유 ) -> 함수가 종료되어 제어권이 호출한 코드로 돌아가면 실행문맥과 그 안의 렉시컬환경컴포넌트가 메모리에서 지워진다    
+
+### this   
+1. 최상위 레벨 코드의 this   
+2. 이벤트 처리기 안의 this   
+3. 생성자 함수 안에 있는 this   
+4. 생성자의 prototype 메서드 안에 this   
+5. 직접 호출한 함수 안에 있는 this   
+6. apply&call 메서드로 호출한 함수 안에 있는 this   
+
+### 스코프 체인   
+```javascript
+var a = 'A';
+function f() {
+    var b = 'B';
+    function g() {
+        var c = 'C';
+        console.log(a+b+c)
+    }
+}
+```
+```
+g_LexicalEnvironment: {
+    EnvironmentRecord: {
+        DeclarativeEnvironmentRecord: {
+            c: 'C'
+        }
+        ObjectEnvironmentRecord: { }
+    },
+    OuterLexicalEnvironment: {
+        f_LexicalEnvironment
+    }
+}
+f_LexicalEnVironment: {
+    EnvironmentRecord: {
+        DeclarativeEnvironmentRecord: {
+            b: 'B'
+        }
+        ObjectEnvironmentRecore: { }
+    }, 
+    OuterLexicalEnvironment: {
+        global_LexicalEnvironment
+    }
+}
+global_LexicalEnvironment: {
+    EnvironmentRecord: {
+        DeclarativeEnvironmentRecord: {},
+        ObjectEnvironmentRecord: {
+            bindObject: {
+                a: 'A'
+            }
+        }
+    },
+    OuterLexicalEnvironment: null
+}
+```
+
+### Closure   
+Closure = 함수 객체 + 렉시컬 환경 컴포넌트   
+함수 객체가 참조하는 렉시컬 환경은 가비지 컬렉션의 대상이 되지않는다   
+
+### 함수 리터럴과 화살표함수의 차이점   
+1. 함수 리터럴은 함수를 호출할 때 this가 결정되지만, 화살표 함수의 this는 정의되면서 정해진다(window)   
+2. arguments 변수가 없다   
+3. 생성자로 사용할 수 없다   
+4. yield 키워드를 사용할 수 없다   
