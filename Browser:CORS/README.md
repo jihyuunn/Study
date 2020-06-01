@@ -21,6 +21,13 @@ HTML과 CSS의 명세에 따라 해석해서 보여주고 이 명세는 W3C 표�
 <img>, <link>와 같은 태그 안에서는 다른 도메인의 정보를 불러올 수 있지만 <script>안에서는 다른 도메인의 정보 요청이 안된다   
 Same Origin Policy : 대부분의 브라우저들이 보안상의 이유로 스크립트에서 Cross-Origin HTTP요청을 제한한다 -> 요청을 보내려면 요청을 보내는 서버와 프로토콜, 포트번호까지 똑같아야된다   
 그래서 CORS가 타 도메인 간에 자원공유를 가능하게 해준다   
++ 'domain1.com' -> 'domain2.com' url이 아예 다르면 요청안됨   
++ 'domain.com:3000' -> 'domain.com:8000' 포트번호가 달라도 요청이 안된다    
+
+### CORS 해결방법    
+- 가장 좋은 방법은 서버쪽에서 해당 도메인에 대한 요청을 허용하는 것이다 (Access-Control-Allow-Origin에서 도메인을 허용해주거나, node에서는 CORS미들웨어를 설치할 수 있다) 
+- create-react-app에서 package.json에 proxy로 root도메인을 등록해주면 되는데 build하고서는 안된다고 한다.. 또는 jsonp를 사용가능 
+
 
 ### Simple Request
 어떤 요청들은 preflight를 만들어내지 않는데 이것을 simple request라고 한다   
