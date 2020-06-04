@@ -58,6 +58,10 @@ addString('/', 'apple', 'orange', 'banana');
 ## 재귀함수   
 재귀함수는 재귀 호출로 문제를 간단하게 풀 수 있을 때 사용한다. 함수를 새로 호출할 때마다 메모리의 다른 영역을 사용하기 때문에 while/for문으로 작성하는 것이 이해하기 쉽고 메모리 공간을 적게 차지한다   
 
+## 스코프   
+1. *함수 스코프* 함수에서 선언된 변수는 함수에서만 유효. 함수 안에서 선언된 변수는 지역변수이고 바깥에서 선언된 변수는 전역변수이다 var    
+2. *블록 스코프* 모든 코드 블록(함수, if, for, try/catch, while)안에서 선언된 변수는 해당 블록 안에서만 유효 let,const    
+
 ## 프로그램 평가와 실행과정   
 - 실행 가능한 코드: 전역코드, 함수코드, eval코드   
 - 실행문맥 Execution Context: 실행 가능한 코드가 실제로 실행되고 관리되는 영역
@@ -97,7 +101,7 @@ EnvironmentRecord와 OuterLexicalEnvironment Reference로 구성됨
 렉시컬 환경 컴포넌트의 구성요소, 렉시컬 환경 안의 식별자와 그 값이 실제로 저장되는 영역.   
 선언적 환경 레코드와 객체 환경 레코드로 구성되어있다   
 1-1. DeclarativeEnvironment Record(선언적 환경 레코드): 실제 함수와 변수, catch문의 식별자와 실행결과가 저장되는 영역   
-1-2. ObjectEnvironment Record(객체 환경 레코드): 실행 문맥 외부에 별도로 저장된 객체의 참조에서 데이터를 읽거나 씀. 전역객체같은 데이터를 복사해오는게 아니라 참조를 가져와서 객체환경레코드의 bindObject라는 프로퍼티에 바인드하게 되어있다     
+1-2. ObjectEnvironment Record(객체 환경 레코드): 실행 문맥 외부에 별도로 저장된 객체의 참조에서 데이터를 읽거나 씀(with문). 전역객체같은 데이터를 복사해오는게 아니라 참조를 가져와서 객체환경레코드의 bindObject라는 프로퍼티에 바인드하게 되어있다     
 ```
 ExecutionContext: {
     LexicalEnvironment: {
