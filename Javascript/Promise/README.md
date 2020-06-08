@@ -1,17 +1,23 @@
-### Promise
+### Promise   
+Promise 객체가 필요한 이유: 자바스크립트는 싱글스레드이기 때문에, 외부 API로 데이터를 받아오거나 web API(setTimeout, setInterval 등)을 처리할 때 코드 순서대로 처리가 되지 않는다. 그래서 비동기 처리를 위해 Promise가 필요하다    
 
 ```javascript
 let promise = new Promise(function(resolve, reject) {
   // executor (the producing code, "singer")
 });
 ```
-resolve(value) 함수가 제대로 처리되었을 때    
-reject(error) 에러가 발생했을 때    
-new Promise constructor에 리턴된 promise 객체는 state, result 속성을 가지고 있다    
+resolve(value) 함수가 제대로 처리되었을 때, reject(error) 에러가 발생했을 때 호출해야하고 둘 중 하나는 꼭 호출을 해야한다    
+Promise 객체의 내부 프로퍼티 -> state, result     
+- state: 처음엔 'pending'이었다가 resolve가 호출되면 'fulfilled', reject가 호출되면 'rejected'로 변한다   
+- result: undefined였다가 resolve(value)가 호출되면 value, reject(error)가 호출되면 error로 변한다    
+
+### promise 3가지 상태   
+- pending: 이행되거나 거부되지 않은 초기의 상태   
+- fulfilled: 연산이 성공적으로 완료됨   
+- rejected: 연산이 실패함   
 _new Promise -> state: "pending", result: undefined_    
 _resolve(value) -> state: "fulfilled", result: value_    
 _reject(error) -> state: "rejected", result: error_    
-오직 한번의 resolve / reject가 실행된다
  
 #### then
 ```javascript
