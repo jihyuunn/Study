@@ -26,9 +26,8 @@ Same Origin Policy : 대부분의 브라우저들이 보안상의 이유로 스�
 
 ### CORS 해결방법    
 - 가장 좋은 방법은 서버쪽에서 해당 도메인에 대한 요청을 허용하는 것이다 (Access-Control-Allow-Origin에서 도메인을 허용해주거나, node에서는 CORS미들웨어를 설치할 수 있다) 
-- create-react-app에서 package.json에 proxy로 root도메인을 등록해주면 되는데 build하고서는 안된다고 한다.. 또는 jsonp를 사용가능 
-
-
+- CORS는 브라우저의 정책이기 때문에 프론트에서 proxy서버를 만들어주면 된다(프론트-브라우저-백엔드로 통신을 하는 것이 아니라, 프론트-브라우저-프론트의프록시서버-백엔드로 처리가 되는 것)   
+ 
 ### Simple Request
 어떤 요청들은 preflight를 만들어내지 않는데 이것을 simple request라고 한다   
 - GET, HEAD, POST 중 한가지 메서드만 가능하다
