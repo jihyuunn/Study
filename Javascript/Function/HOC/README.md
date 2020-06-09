@@ -12,4 +12,14 @@
 - React의 컴포넌트는 모두 HOC?   
 
 ### Currying   
-여러개의 인자를 가진 함수를 호출할 경우, 파라미터의 수보다 적은 인자를 받았을 때 누락된 파라미터를 받는 기법    
+커링이란 인수 두 개 이상을 받는 함수를 분해하여 인수가 하나인 함수의 중첩함수로 변환하는 작업   
+가장 큰 장점은 부분 적용한 함수를 만들어낼 수 있다   
+```javascript
+const pow = function(exponent) {
+    return function(base) {
+        return Math.pow(base, exponent);
+    }
+};
+const square = pow(2);
+const sqrt = pow(.5);
+```
