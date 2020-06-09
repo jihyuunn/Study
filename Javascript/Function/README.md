@@ -61,5 +61,21 @@ addString('/', 'apple', 'orange', 'banana');
 ```
 - 첫번째 인자는 separator와 arguments[0]에 할당이 된다. 그리고 나머지 인자들은 argument[1]부터 순서대로 할당이 된다.   
 
-## 재귀함수   
-재귀함수는 재귀 호출로 문제를 간단하게 풀 수 있을 때 사용한다. 함수를 새로 호출할 때마다 메모리의 다른 영역을 사용하기 때문에 while/for문으로 작성하는 것이 이해하기 쉽고 메모리 공간을 적게 차지한다   
+## apply / bind / call   
+Function.prototype의 프로퍼티  
+```javascript
+const say = (greetings, honorifics) => {
+    console.log(greetings + ' ' + honorifics + this.name)
+};
+const jihyun = { name: "Lee Jihyun" };
+const harry = { name: "Harry Poter" };
+say.apply(jihyun, ["Hello", "Ms"]);
+say.apply(harry, ["Hi", "Mr"]);
+say.call(jihyun, "hello", "Ms");
+say.call(harry, "Hi", "Mr");
+const sayToHarry = say.bind(harry);
+sayToHarry("Hi","Mr");
+``` 
+- apply, call의 첫번째 인수는 함수의 this값이고 두번째 부터는 함수의 인수를 순서대로 담은 배열(apply) / 순서대로 넘기는 것(call)    
+- bind는 함수의 this를 고정시킬 수 있다   
+- apply, call은 함수가 실행이 되지만, bind는 실행이 되지않고 새로운 함수를 반환한다   
