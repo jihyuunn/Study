@@ -10,11 +10,12 @@
 5. 파일 확장자를 URI에 포함시키지 않는다   
 
 |HTTP method|Route|CRUD|
-| >GET|/users|모든 유저의 정보|
-| >GET|/users/:id|특정 유저의 정보|
-| >POST|/users|새로운 유저 생성|
-| >PUT|/users/:id|특정 유저의 정보 수정|
-| >PATCH|/users/:id|특정 유저의 정보 수정|
-| >DELETE|/users/:id|특정 유저의 정보 삭제|
+|:---:|:---:|:---:|
+|`GET`|/users|모든 유저의 정보|
+|`GET`|/users/:id|특정 유저의 정보|
+|`POST`|/users|새로운 유저 생성|
+|`PUT`|/users/:id|특정 유저의 정보 수정|
+|`PATCH`|/users/:id|특정 유저의 정보 수정|
+|`DELETE`|/users/:id|특정 유저의 정보 삭제|
 
 *PUT은 모든 필드의 정보를 다 전달해줘야하고, PATCH는 전달된 필드의 정보만 수정한다*
