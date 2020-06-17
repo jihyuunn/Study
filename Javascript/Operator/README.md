@@ -74,3 +74,10 @@ for (let i =0, sum=0; i<10; i++) {
 ```
 - eval 함수 : python의 eval()과 같다   
 - n.toString, String(n), parseInt() 등   
+
+- 스프레드 연산자: 반복 가능한 객체의 모든 문자를 1개의 요소로 매핑   
+```javascript
+const name = [...'Lydia'];
+console.log(name);
+// ['L', 'y', 'd', 'i', 'a']
+```
