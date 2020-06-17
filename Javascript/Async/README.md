@@ -1,6 +1,7 @@
 ### Async Await
 - function 앞에 async를 붙이면 언제나 promise를 반환한다
-- async안에서 await을 만나면 async함수의 실행을 일시중지하고, 전달된 프로미스의 해결을 기다린 다음 async 함수의 실행을 다시 시작하고 완료 후 값을 반환한다   
+- async안에서 await을 만나면 async함수의 실행을 일시중지하고, await 뒤에 오는 프로미스의 해결을 기다린 다음 async 함수의 실행을 다시 시작하고 완료 후 값을 반환한다   
+- await뒤에는 promise를 반환하는 함수를 실행시켜야한다 그냥 아무거나 실행한다고 await가 작동하지 않는다 그래서 axios, ajax같은 것들도 사실은 promise를 반환하는 메서드이다   
 최상위 레벨에서는 사용할 수 없지만 익명함수로 감싸주면 사용할 수 있다   
 ```javascript
 (async () => {
